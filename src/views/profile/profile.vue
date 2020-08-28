@@ -1,0 +1,88 @@
+<template>
+<div class="profile">
+  <navBar class="navBar">
+    <div slot="center">个人中心</div>
+  </navBar>
+
+  <userInfo></userInfo>
+
+  <section class="account">
+    <div class="account-item">
+      <span class="balance">0.00</span>元
+      <div class="account-info">我的余额</div>
+    </div>  
+    <div class="account-item">
+      <span class="balance">0</span>个
+      <div class="account-info">我的优惠</div>
+    </div>
+    <div class="account-item">
+      <span class="balance">0</span>分
+      <div class="account-info">我的积分</div>
+    </div>    
+  </section>
+
+  <listView :listData="orderList" class="order-list"></listView>
+  <list-view :list-data="serviceList" class="service-list"></list-view>
+</div>
+</template>
+
+<script>
+import navBar from '@/components/common/navBar/navBar.vue';
+
+import userInfo from './childComps/userInfo'
+import listView from './childComps/listView'
+
+export default {
+  name: 'profile',
+  components: {
+    navBar,
+    userInfo,
+    listView
+  },
+  data(){
+    return {
+      orderList: [
+        {icon: '#order', iconColor: '#ff8198', info: '我的消息'},
+        {icon: '#point', iconColor: '#fc7b53', info: '积分商城'},
+        {icon: '#vip', iconColor: '#ffc636', info: '会员卡'}
+      ],
+      serviceList: [
+        {icon: '#service', iconColor: '#ff8198', info: '我的购物车'},
+        {icon: '#download', iconColor: '#ff8198', info: '下载购物APP'}
+      ]
+    }
+  }
+}
+</script>
+<style scoped>
+.navBar {
+  position: relative;
+  background-color:black;
+  font-weight: 700;
+  color: #ccc;
+  z-index: 9;
+}
+.account {
+  display: flex;
+}
+.account-item{
+  width: 100%;
+  background-color: #fff;
+  margin-right: 1px;
+  text-align: center;
+  color: #666;
+  font-size: 13px;
+  padding: 18px;
+}
+.account-item .balance{
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff5f3e;
+}
+.account-info {
+  margin-top: 6px;
+}
+.order-list, .service-list {
+  margin-top: 12px;
+}
+</style>
