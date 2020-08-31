@@ -4,7 +4,7 @@
 ```
 npm install
 ```
-
+npm install --save less less-loader axios better-scroll vant
 ### Compiles and hot-reloads for development
 ```
 npm run serve

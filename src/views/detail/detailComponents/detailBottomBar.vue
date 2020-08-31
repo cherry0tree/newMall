@@ -22,10 +22,14 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+import 'vant/lib/index.css';
+
 	export default {
 		name: "detailBottomBar",
     methods: {
       addToCart() {
+        Toast.success('商品添加成功');
         this.$emit('addToCart')
       }
     }
