@@ -96,7 +96,7 @@ import {getDetailViewData, getGoodsInfo, ShopInfo, goodsParam, getRecommend} fro
         this.titleTopY.push(this.$refs.Param.$el.offsetTop)
         this.titleTopY.push(this.$refs.Comment.$el.offsetTop)
         this.titleTopY.push(this.$refs.Recommend.$el.offsetTop)
-      }, 500)
+      }, 1000)
     },
     methods: {
       imgLoad() {
@@ -110,14 +110,16 @@ import {getDetailViewData, getGoodsInfo, ShopInfo, goodsParam, getRecommend} fro
       },
       contentScroll(position) {
         let length = this.titleTopY.length
-
+        console.log(length)
         const curPositionY = -position.y
+        console.log(curPositionY)
         for(let i = 0; i < length; i++) {
           let position = this.titleTopY[i]
-          
-          if (i < (length - 1) && curPositionY >= this.titleTopY[i] && curPositionY < this.titleTopY[i+1] || (i == length - 1) && curPositionY >= position) {
+          console.log(position)
+          if (i < (length - 1) && curPositionY >= this.titleTopY[i] && (curPositionY < this.titleTopY[i+1] || curPositionY < this.titleTopY[i+2]) || (i == length - 1) && curPositionY >= position) {
             this.curIndex = i;
             this.$refs.detailNavBar.curIndex = this.curIndex;
+            console.log(this.curIndex)
           }
         }
       },

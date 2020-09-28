@@ -1,5 +1,5 @@
 <template>
-<div class="userInfo">
+<div class="userInfo" @click="goToLogin">
   <a href="#" class="clear-fix">
     <slot name="user-icon">
       <svg class="privateImage-svg left">
@@ -24,7 +24,12 @@
 
 <script>
 export default {
-  name: 'userInfo'
+  name: 'userInfo',
+  methods: {
+    goToLogin() {
+      this.$router.push('login')
+    }
+  }
 }
 </script>
 <style scoped>

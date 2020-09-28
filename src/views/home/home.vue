@@ -107,6 +107,7 @@ import {getMultiData, getGoodsData} from '@/network/home'
         let page = this.goods[type].page;
         getGoodsData(type, page).then(res=> {
           console.log(res.data)
+          //...是扩展运算符
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page++
         })
