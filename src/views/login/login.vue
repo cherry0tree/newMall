@@ -94,7 +94,8 @@ Vue.use(Field)
 Vue.use(CellGroup)
 Vue.use(Button)
 
-import { getPhoneCaptcha } from '@/network/login'
+import { getPhoneCaptcha, phoneCaptchaLogin} from '@/network/login'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'login',
@@ -138,6 +139,7 @@ export default {
     }    
   },
   methods:{
+    ...mapActions(['syncUserInfo']),
     //获取手机验证码
     async sendVerifyCode() {
       this.countDown = 60;
@@ -173,7 +175,7 @@ export default {
     phoneRegex(number){
       return (/[1][3,4,5,6,7,8][0-9]{9}$/.test(number));
     },
-    login() {
+    async login() {
         // 5.2 账号密码登录
         // 5.2.1 验证输入框
        if(this.isShowSMSLogin) { 
@@ -213,6 +215,11 @@ export default {
             });
             return;            
           } else {
+            console.log(this.login_phone)
+            let ref = await phoneCaptchaLogin(this.login_phone, this.smsCaptcha);
+            // 设置userInfo 保存到vuex和本地
+            this.syncUserInfo(ref.data);
+            console.log(ref.data)            
             this.$router.back();
           }
         }

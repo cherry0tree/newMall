@@ -4,7 +4,17 @@
     <div slot="center">个人中心</div>
   </navBar>
 
-  <userInfo></userInfo>
+  <!-- 未登录状态 -->
+  <userInfo v-if="!usersInfo.token"></userInfo>
+  
+  <!-- 已登录状态 -->
+  <div class="personMsg"
+       v-if="usersInfo.token">
+    <img :src="user_image.login_icon" alt="">
+    <div class="personInfo">
+      <span>{{usersInfo.user_name}}</span>
+    </div>
+  </div>
 
   <section class="account">
     <div class="account-item">
@@ -32,6 +42,8 @@ import navBar from '@/components/common/navBar/navBar.vue';
 import userInfo from './childComps/userInfo'
 import listView from './childComps/listView'
 
+import { mapState } from 'vuex'
+
 export default {
   name: 'profile',
   components: {
@@ -39,7 +51,7 @@ export default {
     userInfo,
     listView
   },
-  data(){
+  data() {
     return {
       orderList: [
         {icon: '#order', iconColor: '#ff8198', info: '我的消息'},
@@ -49,8 +61,14 @@ export default {
       serviceList: [
         {icon: '#service', iconColor: '#ff8198', info: '我的购物车'},
         {icon: '#download', iconColor: '#ff8198', info: '下载购物APP'}
-      ]
+      ],
+      user_image: {
+        login_icon: require('../../assets/img/views/profile/defaultImg.jpeg')
+      }
     }
+  },
+  computed: {
+    ...mapState(['usersInfo'])
   }
 }
 </script>
@@ -84,5 +102,19 @@ export default {
 }
 .order-list, .service-list {
   margin-top: 12px;
+}
+.personMsg{
+  display: flex;
+  align-items: center;  
+}
+.personMsg img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.personInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.8rem;  
 }
 </style>
